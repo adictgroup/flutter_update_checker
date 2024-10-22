@@ -13,15 +13,18 @@ and the Flutter guide for
 
 # flutter_update_checker
 
-[![Pub](https://img.shields.io/pub/v/flutter_update_checker.svg)](https://pub.dev/packages/flutter_update_checker)
+[![pub points](https://img.shields.io/pub/points/flutter_update_checker?color=2E8B57&label=pub%20points)](https://pub.dev/packages/flutter_update_checker/score)
+[![pub package](https://img.shields.io/pub/v/flutter_update_checker.svg)](https://pub.dev/packages/flutter_update_checker)
 
 Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore).
 It helps developers notify users about new versions of the app, ensuring that they always have the latest features and bug fixes.
 
+![version info](./other/docs/images/image1.png)
+
 ## Features
 
 1. Getting the version/checking update from the store where the application was downloaded  
-1. Getting a version from another store (except Google Play)
+1. Getting a version from another store (except Google Play*)
 1. Opening link to store
 
 ## Platform support
@@ -30,8 +33,16 @@ It helps developers notify users about new versions of the app, ensuring that th
 | ------------------------------ | :---------------: | :-: |
 | App Store                      | ✅                | ✅  |
 | App Gallery                    | ✅                | ✅  |
-| Google Play                    | (Only if from GP) |   |
+| Google Play                    | (Only if from GP)* |   |
 | RuStore                        | ✅                | ✅  |
+
+\* Please note that this Google Play update check cannot be tested locally. You must install the app through Google Play to use it. Please refer to the official documentation on in-app updates from Google:
+
+https://developer.android.com/guide/playcore/in-app-updates/test
+
+## Requirements
+* Android >=5 (API >=21)
+* iOS >=12
 
 ## Getting started
 
@@ -44,6 +55,12 @@ Code:
   <string>itms-apps</string>
 </array>
 ```
+
+Use Semantic Versioning (X.Y.Z) in `pubspec.yaml`
+```yaml
+version: 1.2.3+XXXXXX
+```
+
 
 ## Usage
 
