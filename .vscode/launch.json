@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🌐 Example",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/example",
+      "program": "lib/main.dart",
+      "flutterMode": "debug",
+      "args": [
+        "-d",
+        "chrome",
+        "--web-renderer html",
+        "--web-hostname=127.0.0.1",
+        "--web-port=8888",
+        "--web-browser-flag",
+        "--disable-web-security",
+      ],
+    },
+  ]
+}
