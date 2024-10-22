@@ -23,6 +23,15 @@ Simple package to check update for Android (Google Play, App Gallery, RuStore) a
 1. Getting a version from another store (except Google Play)
 1. Opening link to store
 
+## Platform support
+
+| Feature                        | Android           | iOS |
+| ------------------------------ | :---------------: | :-: |
+| App Store                      | ✅                | ✅  |
+| App Gallery                    | ✅                | ✅  |
+| Google Play                    | (Only if from GP) |   |
+| RuStore                        | ✅                | ✅  |
+
 ## Getting started
 
 For iOS you have to add LSApplicationQueriesSchemes as Array param to Info.plist and add itms-apps as one of params in this array to link appstore.
@@ -58,12 +67,3 @@ String storeVersion = await updateChecker.getStoreVersion();
 // Open Store Link
 await updateChecker.update();
 ```
-
-## Platform support
-
-| Feature                        | Android           | iOS |
-| ------------------------------ | :---------------: | :-: |
-| App Store                      | ✅                | ✅  |
-| App Gallery                    | ✅                | ✅  |
-| Google Play                    | (Only if from GP) |   |
-| RuStore                        | ✅                | ✅  |
