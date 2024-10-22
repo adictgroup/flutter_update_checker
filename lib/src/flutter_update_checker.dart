@@ -7,7 +7,6 @@ import 'datasources/huawei_datasource.dart';
 import 'datasources/i_store_datasource.dart';
 import 'datasources/ru_store_datasource.dart';
 import 'store_types.dart';
-import 'package:collection/collection.dart';
 
 /// UpdateStoreChecker class
 ///
@@ -152,10 +151,10 @@ class UpdateStoreChecker {
       // Fetch the package info and determine the installer store
       final installedFrom = (await PackageInfo.fromPlatform()).installerStore;
 
-      // Find the matching store type
-      final type = StoreType.values.firstWhereOrNull(
-        (s) => installedFrom == s.package,
-      );
+      StoreType? type;
+      for (var s in StoreType.values) {
+        if(s.package==installedFrom) return s;
+      }
       return type;
     } on Exception catch (e) {
       debugPrint('[🔄 Update: getStoreType] err: $e');
