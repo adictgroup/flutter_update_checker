@@ -10,13 +10,13 @@ import 'store_types.dart';
 import 'package:collection/collection.dart';
 
 /// UpdateStoreChecker class
-/// 
+///
 /// This class allows checking for updates in the app store
 /// where the app was installed from. It supports App Store, Google Play,
 /// Huawei AppGallery, and RuStore.
-/// 
+///
 /// Example usage:
-/// 
+///
 /// ```dart
 /// final updateChecker = UpdateStoreChecker(
 ///   iosAppStoreId: 564177498,
@@ -25,13 +25,13 @@ import 'package:collection/collection.dart';
 ///   androidRuStorePackage: 'com.vkontakte.android',
 ///   androidGooglePlayPackage: 'com.vkontakte.android',
 /// );
-/// 
+///
 /// // Check update
 /// bool isUpdateAvailable = await updateChecker.checkUpdate();
-/// 
+///
 /// // Get version from Store
 /// String storeVersion = await updateChecker.getStoreVersion();
-/// 
+///
 /// // Open Store Link
 /// await updateChecker.update();
 /// ```
@@ -43,17 +43,16 @@ class UpdateStoreChecker {
   String? _androidAppGalleryPackageName;
   String? _androidRuStorePackage;
 
-
   /// Constructor for UpdateStoreChecker
-  /// 
+  ///
   /// The constructor accepts optional parameters for different store identifiers.
-  /// 
+  ///
   /// [iosAppStoreId] - ID of the app in the iOS App Store. // https://apps.apple.com/en/app/idXXXXXXXXX
   /// [androidGooglePlayPackage] - Package name of the app in Google Play. // https://play.google.com/store/apps/details?id=xxx.xxxxxx.xxxxx
   /// [androidAppGalleryId] - ID of the app in Huawei AppGallery. // https://appgallery.huawei.ru/app/CXXXXXXXXX
   /// [androidAppGalleryPackageName] - Package name in Huawei AppGallery.
   /// [androidRuStorePackage] - Package name in RuStore.
-  /// 
+  ///
   UpdateStoreChecker({
     int? iosAppStoreId,
     String? androidGooglePlayPackage,
@@ -68,14 +67,14 @@ class UpdateStoreChecker {
   }
 
   /// Checks if an update is available for the app in the store.
-  /// 
+  ///
   /// This method identifies the store from where the app was installed and
   /// checks for an available update. It also allows providing a specific
   /// store type or version for comparison.
-  /// 
+  ///
   /// [store] - Optional, specify the store to check. If null, it will auto-detect.
   /// [storeVersion] - Optional, specify a version to compare with the store's version.
-  /// 
+  ///
   /// Returns `true` if an update is available, otherwise `false`.
   Future<bool> checkUpdate({StoreType? store, String? storeVersion}) async {
     try {
@@ -96,9 +95,9 @@ class UpdateStoreChecker {
   }
 
   /// Opens the app's store page to update the app.
-  /// 
+  ///
   /// This method redirects the user to the store page of the app for updating.
-  /// 
+  ///
   /// [store] - Optional, specify the store type. If null, it will auto-detect.
   Future<void> update({StoreType? store}) async {
     try {
@@ -118,11 +117,11 @@ class UpdateStoreChecker {
   }
 
   /// Retrieves the current version of the app in the store.
-  /// 
+  ///
   /// This method fetches the version of the app from the respective app store.
-  /// 
+  ///
   /// [store] - Optional, specify the store type. If null, it will auto-detect.
-  /// 
+  ///
   /// Returns the version of the app as a string, or "0.0.0" if it fails.
   Future<String> getStoreVersion({StoreType? store}) async {
     try {
@@ -143,10 +142,10 @@ class UpdateStoreChecker {
   }
 
   /// Determines the store type from where the app was installed.
-  /// 
+  ///
   /// This method checks the platform the app was installed from (e.g. App Store, Google Play)
   /// using the package information.
-  /// 
+  ///
   /// Returns the [StoreType] of the store, or `null` if it can't be determined.
   Future<StoreType?> getStoreType() async {
     try {
@@ -165,12 +164,12 @@ class UpdateStoreChecker {
   }
 
   /// Returns the data source for a given store type.
-  /// 
+  ///
   /// Depending on the [StoreType], this method returns an instance of the corresponding
   /// data source (e.g. App Store, Google Play).
-  /// 
+  ///
   /// [type] - The type of the store (e.g., App Store, Google Play, etc.).
-  /// 
+  ///
   /// Returns an instance of [IStoreDataSource], or `null` if no data source is available.
   Future<IStoreDataSource?> _getStoreDataSource(StoreType type) async {
     try {
@@ -200,12 +199,12 @@ class UpdateStoreChecker {
   }
 
   /// Internal method to check if an update is available in the store.
-  /// 
+  ///
   /// This method interacts with the store's data source to check for an update.
-  /// 
+  ///
   /// [store] - The store data source to check for an update.
   /// [storeVersion] - Optional, the version to compare against the store version.
-  /// 
+  ///
   /// Returns `true` if an update is needed, otherwise `false`.
   Future<bool> _checkUpdateStore(
     IStoreDataSource store, {
@@ -220,9 +219,9 @@ class UpdateStoreChecker {
   }
 
   /// Internal method to get the version of the app from the store.
-  /// 
+  ///
   /// [store] - The store data source.
-  /// 
+  ///
   /// Returns the store version as a string.
   Future<String> _getStoreVersion(IStoreDataSource store) async {
     try {

@@ -128,7 +128,7 @@ class HuaweiDataSource extends IStoreDataSource {
   @override
   Future<bool> needUpdate({String? storeVersion}) async {
     try {
-      final version = storeVersion??await getStoreVersion();
+      final version = storeVersion ?? await getStoreVersion();
       final nowVersion = (await PackageInfo.fromPlatform()).version;
       if (!UtilsUpdate.isNew(version, nowVersion) || version == '0.0.0') {
         return false;

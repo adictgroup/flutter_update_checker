@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-
 /// Enum representing different types of app stores where an app can be installed from.
 enum StoreType {
   APP_STORE(packageName: 'com.apple', title: 'App Store'),

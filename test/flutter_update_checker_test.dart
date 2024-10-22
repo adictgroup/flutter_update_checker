@@ -12,7 +12,6 @@ class CustomBindings extends AutomatedTestWidgetsFlutterBinding {
 void main() {
   CustomBindings();
 
-
   const fakePackageName = 'com.vkontakte.android';
   const fakeCurrentVersion = '8.98';
   const fakeInstalledFromStore = 'ru.vk.store'; // 'com.apple.testflight'
@@ -22,7 +21,6 @@ void main() {
   const appGalleryId = 'C101104117';
   const appGalleryPackageName = fakePackageName;
   const ruStorePackageName = fakePackageName;
-  
 
   setUp(() {
     PackageInfo.setMockInitialValues(
@@ -32,7 +30,7 @@ void main() {
       buildNumber: '1',
       buildSignature: 'test',
       installerStore: fakeInstalledFromStore,
-    ); 
+    );
   });
 
   group('[Installed From] Store', () {
