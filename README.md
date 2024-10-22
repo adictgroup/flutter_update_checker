@@ -13,11 +13,15 @@ and the Flutter guide for
 
 # flutter_update_checker
 
+[![pub package](https://img.shields.io/pub/v/flutter_update_checker.svg?label=pub%20ver)](https://pub.dev/packages/flutter_update_checker)
 [![pub points](https://img.shields.io/pub/points/flutter_update_checker?color=2E8B57&label=pub%20points)](https://pub.dev/packages/flutter_update_checker/score)
-[![pub package](https://img.shields.io/pub/v/flutter_update_checker.svg)](https://pub.dev/packages/flutter_update_checker)
 
-Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore).
+Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore).  
+
 It helps developers notify users about new versions of the app, ensuring that they always have the latest features and bug fixes.
+
+[Feedback](https://github.com/adictgroup/flutter_update_checker/issues) and [Pull Requests](https://github.com/adictgroup/flutter_update_checker/pulls) are most welcome!
+
 
 ![version info](./other/docs/images/image1.png)
 
