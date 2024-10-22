@@ -50,6 +50,8 @@ Check example
 in `/example` folder.
 
 ```dart
+import 'package:flutter_update_checker/flutter_update_checker.dart';
+
 final updateChecker = UpdateStoreChecker(
       iosAppStoreId: 564177498,
       androidAppGalleryId: 'C101104117',
