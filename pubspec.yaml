@@ -5,6 +5,9 @@ homepage: https://github.com/adictgroup/flutter_update_checker
 repository: https://github.com/adictgroup/flutter_update_checker
 issue_tracker: https://github.com/adictgroup/flutter_update_checker/issues
 
+topics:
+ - update
+
 environment:
   sdk: '>=3.3.4 <4.0.0'
   flutter: ">=1.17.0"
