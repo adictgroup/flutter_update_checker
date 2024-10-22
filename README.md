@@ -17,8 +17,6 @@ and the Flutter guide for
 
 This package helps developers easily check for updates of their applications from various app stores, ensuring that users are notified about new versions with the latest features and bug fixes.
 
-[Feedback](https://github.com/adictgroup/flutter_update_checker/issues) and [Pull Requests](https://github.com/adictgroup/flutter_update_checker/pulls) are most welcome!
-
 ![version info](./other/docs/images/image1.png)
 
 ## Table of Contents
@@ -74,7 +72,7 @@ version: 1.2.3+XXXXXX
 ```
 
 ## Usage
-Refer to the example provided in the `/example` folder for detailed usage.
+Refer to the example provided in the [`/example`](./example) folder for detailed usage.
 
 Here's a simple example of how to check for updates:
 
@@ -112,7 +110,8 @@ void checkForUpdates() async {
 ```
 
 ## Contributing
-We welcome contributions! Please feel free to open issues and submit pull requests on the GitHub repository.
+
+[Feedback](https://github.com/adictgroup/flutter_update_checker/issues) and [Pull Requests](https://github.com/adictgroup/flutter_update_checker/pulls) are most welcome!
 
 ## License
-This package is licensed under the MIT License.
+This package is licensed under the [MIT License](https://github.com/adictgroup/flutter_update_checker/LICENSE)
