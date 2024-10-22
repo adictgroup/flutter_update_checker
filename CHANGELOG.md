@@ -1,3 +1,7 @@
+## 0.1.2
+
+- chore(docs): update readme
+
 ## 0.1.1
 
 - feat(deps): Relax `collection` deps
