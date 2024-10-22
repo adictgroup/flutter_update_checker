@@ -15,7 +15,8 @@ and the Flutter guide for
 
 [![Pub](https://img.shields.io/pub/v/flutter_update_checker.svg)](https://pub.dev/packages/flutter_update_checker)
 
-Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore)
+Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore).
+It helps developers notify users about new versions of the app, ensuring that they always have the latest features and bug fixes.
 
 ## Features
 
