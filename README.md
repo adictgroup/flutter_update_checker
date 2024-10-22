@@ -45,7 +45,8 @@ This package helps developers easily check for updates of their applications fro
 | Google Play                    | (Only if installed from Google Play)* |   |
 | RuStore                        | ✅                | ✅  |
 
-*Note: Google Play update checks cannot be tested locally. You must install the app via Google Play. Refer to the [official documentation](https://developer.android.com/guide/playcore/in-app-updates/test) for in-app updates.
+> [!IMPORTANT]
+> Google Play update checks cannot be tested locally. You must install the app via Google Play. Refer to the [official documentation](https://developer.android.com/guide/playcore/in-app-updates/test) for in-app updates.
 
 ## Requirements
 
