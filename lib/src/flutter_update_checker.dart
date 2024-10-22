@@ -153,7 +153,7 @@ class UpdateStoreChecker {
 
       StoreType? type;
       for (var s in StoreType.values) {
-        if(s.package==installedFrom) return s;
+        if (s.package == installedFrom) return s;
       }
       return type;
     } on Exception catch (e) {
