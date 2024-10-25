@@ -23,7 +23,7 @@ class HuaweiDataSource extends IStoreDataSource {
 
   // Hardcode, yeah
   String _buildData() {
-    final Map<String, dynamic> params = {
+    final params = <String, dynamic>{
       'agVersion': '12.0.1',
       'brand': 'Android',
       'buildNumber': 'QQ2A.200405.005.2020.04.07.17',

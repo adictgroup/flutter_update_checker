@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 

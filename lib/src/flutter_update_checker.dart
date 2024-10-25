@@ -152,7 +152,7 @@ class UpdateStoreChecker {
       final installedFrom = (await PackageInfo.fromPlatform()).installerStore;
 
       StoreType? type;
-      for (var s in StoreType.values) {
+      for (final s in StoreType.values) {
         if (s.package == installedFrom) return s;
       }
       return type;

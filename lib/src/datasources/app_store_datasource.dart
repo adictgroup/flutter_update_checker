@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/widgets.dart';
 import 'package:dio/dio.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../store_urls.dart';
 import '../utils/utils_update.dart';
