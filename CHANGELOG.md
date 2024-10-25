@@ -1,3 +1,7 @@
+## 0.1.3
+
+- feat(update): open link in browser if you can't open store app
+
 ## 0.1.2
 
 - chore(docs): update readme
