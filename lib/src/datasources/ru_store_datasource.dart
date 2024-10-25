@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:dio/dio.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../store_urls.dart';
 import '../utils/utils_update.dart';
@@ -32,10 +32,18 @@ class RuStoreDataSource extends IStoreDataSource {
   }
 
   @override
-  Future<void> update() => launchUrl(
-        Uri.parse(StoreUrls.androidRuStoreUpdateUrl(packageName)),
+  Future<void> update() async {
+    try {
+      final isSuccess = await launchUrlString(
+        StoreUrls.androidRuStoreUpdateUrl(packageName),
         mode: LaunchMode.externalNonBrowserApplication,
       );
+      if (isSuccess) return;
+      await launchUrlString(StoreUrls.androidRuStoreUpdateUrl(packageName));
+    } catch (e) {
+      debugPrint('[🔄 Update: update] err: $e');
+    }
+  }
 
   @override
   Future<bool> needUpdate({String? storeVersion}) async {

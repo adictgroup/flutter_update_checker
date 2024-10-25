@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../store_urls.dart';
 import '../utils/utils_update.dart';
@@ -120,10 +120,18 @@ class HuaweiDataSource extends IStoreDataSource {
   }
 
   @override
-  Future<void> update() => launchUrl(
-        Uri.parse(StoreUrls.androidAppGalleryUpdateUrl(appId)),
+  Future<void> update() async {
+    try {
+      final isSuccess = await launchUrlString(
+        StoreUrls.androidAppGalleryUpdateUrl(appId),
         mode: LaunchMode.externalNonBrowserApplication,
       );
+      if (isSuccess) return;
+      await launchUrlString(StoreUrls.androidAppGalleryUpdateUrl(appId));
+    } catch (e) {
+      debugPrint('[🔄 Update: update] err: $e');
+    }
+  }
 
   @override
   Future<bool> needUpdate({String? storeVersion}) async {
