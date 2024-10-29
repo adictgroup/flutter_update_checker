@@ -58,7 +58,10 @@ class UpdateStoreChecker {
     String? androidAppGalleryId,
     String? androidAppGalleryPackageName,
     String? androidRuStorePackage,
-  }) {
+  }) : assert(
+          androidAppGalleryId != null && androidAppGalleryPackageName != null,
+          'AppGallery required App Id and Package Name',
+        ) {
     _iosAppStoreId = iosAppStoreId;
     _androidAppGalleryId = androidAppGalleryId;
     _androidAppGalleryPackageName = androidAppGalleryPackageName;
