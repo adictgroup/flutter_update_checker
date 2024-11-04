@@ -54,6 +54,7 @@ class UpdateStoreChecker {
   ///
   UpdateStoreChecker({
     int? iosAppStoreId,
+    // ignore: avoid_unused_constructor_parameters
     String? androidGooglePlayPackage,
     String? androidAppGalleryId,
     String? androidAppGalleryPackageName,
