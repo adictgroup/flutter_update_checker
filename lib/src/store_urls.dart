@@ -4,6 +4,8 @@ class StoreUrls {
       'https://itunes.apple.com/lookup?id=$appId&country=RU'; // https://23.1.100.27/lookup?id=$appId&country=RU'; // Fix If Itunes Down
   static String iosAppStoreUpdateUrl(String appId) =>
       'itms-apps://itunes.apple.com/app/id$appId';
+  static String iosAppStoreUpdateUrlHttp(String appId) =>
+      'https://itunes.apple.com/app/id$appId';
   static String androidRuStore(String packageName) =>
       'https://backapi.rustore.ru/applicationData/overallInfo/$packageName';
   static String androidRuStoreUpdateUrl(String packageName) =>

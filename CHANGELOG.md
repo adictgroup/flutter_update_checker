@@ -1,3 +1,7 @@
+## 0.1.4
+
+- feat(update): open app store link in browser if you can't open app
+
 ## 0.1.3
 
 - feat(update): open link in browser if you can't open store app
