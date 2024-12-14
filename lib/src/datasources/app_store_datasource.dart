@@ -11,13 +11,14 @@ import './i_store_datasource.dart';
 
 class AppStoreDataSource extends IStoreDataSource {
   final String appId;
+  final String country;
 
-  AppStoreDataSource({required this.appId});
+  AppStoreDataSource({required this.appId, this.country = 'US'});
 
   @override
   Future<String> getStoreVersion() async {
     try {
-      final url = StoreUrls.iosAppStore(appId);
+      final url = StoreUrls.iosAppStore(appId, country: country);
       final response = await Dio().get(url).timeout(
             const Duration(seconds: 10),
           );
@@ -28,6 +29,7 @@ class AppStoreDataSource extends IStoreDataSource {
 
       return decodedResults['results'][0]['version'];
     } catch (e) {
+      debugPrint('[🔄 Update: getStoreVersion] err: $e');
       return '0.0.0';
     }
   }

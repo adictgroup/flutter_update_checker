@@ -1,6 +1,6 @@
 name: flutter_update_checker
 description: Simple package to check update for Android (Google Play, App Gallery, RuStore) and iOS (AppStore)
-version: 0.1.4
+version: 0.1.5
 homepage: https://github.com/adictgroup/flutter_update_checker
 repository: https://github.com/adictgroup/flutter_update_checker
 issue_tracker: https://github.com/adictgroup/flutter_update_checker/issues
@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
   in_app_update: ^4.2.3
-  package_info_plus: ^8.1.0
+  package_info_plus: ^8.1.1
   url_launcher: ^6.3.1
 
 dev_dependencies:

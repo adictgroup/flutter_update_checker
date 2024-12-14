@@ -35,6 +35,7 @@ void main() {
   group('[Installed From] Store', () {
     final checker = UpdateStoreChecker(
       iosAppStoreId: appStoreId,
+      iosAppStoreCountry: 'RU',
       androidAppGalleryId: appGalleryId,
       androidAppGalleryPackageName: appGalleryPackageName,
       androidRuStorePackage: ruStorePackageName,
@@ -57,6 +58,7 @@ void main() {
   group('App Store', () {
     final checker = UpdateStoreChecker(
       iosAppStoreId: appStoreId,
+      iosAppStoreCountry: 'RU',
     );
     const storeType = StoreType.APP_STORE;
     String? storeVersion;
