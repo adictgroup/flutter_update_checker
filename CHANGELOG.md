@@ -1,6 +1,7 @@
 ## 0.1.5
 
 - feat(app-store): set country for app store
+- upd(deps): upd dio to 5.8.0+1 and package_info_plus to 8.2.1
 
 ## 0.1.4
 
