@@ -1,7 +1,7 @@
 /// Static class containing store-related URL utilities.
 class StoreUrls {
-  static String iosAppStore(String appId) =>
-      'https://itunes.apple.com/lookup?id=$appId&country=RU'; // https://23.1.100.27/lookup?id=$appId&country=RU'; // Fix If Itunes Down
+  static String iosAppStore(String appId, {String country = 'US'}) =>
+      'https://itunes.apple.com/lookup?id=$appId&country=$country'; // https://23.1.100.27/lookup?id=$appId&country=$country'; // Fix If Itunes Down
   static String iosAppStoreUpdateUrl(String appId) =>
       'itms-apps://itunes.apple.com/app/id$appId';
   static String iosAppStoreUpdateUrlHttp(String appId) =>

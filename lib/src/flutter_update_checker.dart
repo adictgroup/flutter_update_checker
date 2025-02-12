@@ -38,6 +38,7 @@ import 'store_types.dart';
 class UpdateStoreChecker {
   // Store-specific identifiers for checking updates
   int? _iosAppStoreId;
+  String? _iosAppStoreCountry;
   String? _androidAppGalleryId;
   String? _androidAppGalleryPackageName;
   String? _androidRuStorePackage;
@@ -47,6 +48,7 @@ class UpdateStoreChecker {
   /// The constructor accepts optional parameters for different store identifiers.
   ///
   /// [iosAppStoreId] - ID of the app in the iOS App Store. // https://apps.apple.com/en/app/idXXXXXXXXX
+  /// [iosAppStoreCountry] - Country of the app in the iOS App Store. // https://apps.apple.com/XX/app/id123455
   /// [androidGooglePlayPackage] - Package name of the app in Google Play. // https://play.google.com/store/apps/details?id=xxx.xxxxxx.xxxxx
   /// [androidAppGalleryId] - ID of the app in Huawei AppGallery. // https://appgallery.huawei.ru/app/CXXXXXXXXX
   /// [androidAppGalleryPackageName] - Package name in Huawei AppGallery.
@@ -54,16 +56,21 @@ class UpdateStoreChecker {
   ///
   UpdateStoreChecker({
     int? iosAppStoreId,
+    String? iosAppStoreCountry,
     // ignore: avoid_unused_constructor_parameters
     String? androidGooglePlayPackage,
     String? androidAppGalleryId,
     String? androidAppGalleryPackageName,
     String? androidRuStorePackage,
   }) : assert(
-          androidAppGalleryId != null && androidAppGalleryPackageName != null,
-          'AppGallery required App Id and Package Name',
+          (androidAppGalleryId == null &&
+                  androidAppGalleryPackageName == null) ||
+              (androidAppGalleryId != null &&
+                  androidAppGalleryPackageName != null),
+          'If androidAppGalleryId is not null, androidAppGalleryPackageName must also be not null, and vice versa.',
         ) {
     _iosAppStoreId = iosAppStoreId;
+    _iosAppStoreCountry = iosAppStoreCountry;
     _androidAppGalleryId = androidAppGalleryId;
     _androidAppGalleryPackageName = androidAppGalleryPackageName;
     _androidRuStorePackage = androidRuStorePackage;
@@ -179,13 +186,18 @@ class UpdateStoreChecker {
       switch (type) {
         case StoreType.APP_STORE:
           if (_iosAppStoreId == null) return null;
-          return AppStoreDataSource(appId: _iosAppStoreId.toString());
+          return AppStoreDataSource(
+            appId: _iosAppStoreId.toString(),
+            country: _iosAppStoreCountry ?? 'US',
+          );
         case StoreType.RU_STORE:
           if (_androidRuStorePackage == null) return null;
           return RuStoreDataSource(packageName: _androidRuStorePackage!);
         case StoreType.APP_GALLERY:
           if (_androidAppGalleryId == null ||
-              _androidAppGalleryPackageName == null) return null;
+              _androidAppGalleryPackageName == null) {
+            return null;
+          }
           return HuaweiDataSource(
             appId: _androidAppGalleryId!,
             packageName: _androidAppGalleryPackageName!,
