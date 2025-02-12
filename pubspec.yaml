@@ -5,6 +5,10 @@ homepage: https://github.com/adictgroup/flutter_update_checker
 repository: https://github.com/adictgroup/flutter_update_checker
 issue_tracker: https://github.com/adictgroup/flutter_update_checker/issues
 
+screenshots:
+  - description: "flutter_update_checker Logo"
+    path: other/docs/images/pub_logo.png
+
 topics:
  - update
 
