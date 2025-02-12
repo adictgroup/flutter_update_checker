@@ -1,3 +1,7 @@
+## 0.1.5
+
+- feat(app-store): set country for app store
+
 ## 0.1.4
 
 - feat(update): open app store link in browser if you can't open app
