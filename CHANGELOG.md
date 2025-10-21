@@ -1,3 +1,8 @@
+## 1.0.0
+
+- upd(dart): dart sdk from 3.6.0
+- upd(deps): upd dio to 5.9.0, in_app_update to 4.2.5, package_info_plus to 9.0.0, url_launcher to 6.3.2, flutter_lints to 6.0.0
+
 ## 0.1.5
 
 - feat(app-store): set country for app store
