@@ -88,11 +88,7 @@ class HuaweiDataSource extends IStoreDataSource {
     try {
       const url = 'https://store-dre.hispace.dbankcloud.com/hwmarket/api/clientApi';
       final response = await Dio()
-          .request(
-            url,
-            options: Options(method: 'POST', headers: _headers),
-            data: _buildData(),
-          )
+          .request(url, options: Options(method: 'POST', headers: _headers), data: _buildData())
           .timeout(const Duration(seconds: 10));
       if (response.data.isEmpty) return null;
 
@@ -122,7 +118,6 @@ class HuaweiDataSource extends IStoreDataSource {
         mode: LaunchMode.externalNonBrowserApplication,
       );
       if (isSuccess) return false;
-
 
       return await launchUrlString(StoreUrls.androidAppGalleryUpdateUrl(appId!));
     } catch (e) {

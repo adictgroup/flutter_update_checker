@@ -31,14 +31,18 @@ class _MainAppState extends State<MainApp> {
     );
     final updateSource = await checker.getStoreType();
 
-    updateInfo.addEntries(StoreType.values
-        // Show GP only if downloaded from GP, Don't show TF
-        .where((e) =>
-            e != StoreType.TEST_FLIGHT &&
-            e != StoreType.iOS_SIMULATOR &&
-            (updateSource == StoreType.GOOGLE_PLAY ||
-                e != StoreType.GOOGLE_PLAY))
-        .map((s) => MapEntry(s, 'loading...')));
+    updateInfo.addEntries(
+      StoreType.values
+          // Show GP only if downloaded from GP, Don't show TF
+          .where(
+            (e) =>
+                e != StoreType.TEST_FLIGHT &&
+                e != StoreType.iOS_SIMULATOR &&
+                (updateSource == StoreType.GOOGLE_PLAY ||
+                    e != StoreType.GOOGLE_PLAY),
+          )
+          .map((s) => MapEntry(s, 'loading...')),
+    );
 
     setState(() {});
 
@@ -52,31 +56,32 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: Colors.white,
-          body: Center(
-            child: updateInfo.isEmpty
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child:
+            updateInfo.isEmpty
                 ? const CircularProgressIndicator.adaptive()
                 : ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 200),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (c, i) => const SizedBox(height: 8),
-                      itemCount: updateInfo.entries.length,
-                      itemBuilder: (c, i) {
-                        final item = updateInfo.entries.toList()[i];
-                        return Row(
-                          children: [
-                            Text(item.key.title),
-                            const Spacer(),
-                            Text(item.value.toString()),
-                          ],
-                        );
-                      },
-                    ),
+                  constraints: const BoxConstraints(maxWidth: 200),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    separatorBuilder: (c, i) => const SizedBox(height: 8),
+                    itemCount: updateInfo.entries.length,
+                    itemBuilder: (c, i) {
+                      final item = updateInfo.entries.toList()[i];
+                      return Row(
+                        children: [
+                          Text(item.key.title),
+                          const Spacer(),
+                          Text(item.value.toString()),
+                        ],
+                      );
+                    },
                   ),
-          ),
-        ),
-      );
+                ),
+      ),
+    ),
+  );
 }
