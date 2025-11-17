@@ -113,7 +113,9 @@ void checkForUpdates() async {
 
 ## Contributors
 
-<table>
+[![contributors](https://contrib.rocks/image?repo=adictgroup/flutter_update_checker)](https://github.com/adictgroup/flutter_update_checker/graphs/contributors)
+
+<!-- <table>
   <tr>
     <td align="center"><a href="https://github.com/adictgroup">
     <img src="https://avatars.githubusercontent.com/u/25362515?v=4" width="100px;" style="border-radius: 50%"  alt="" /><br />
@@ -121,12 +123,9 @@ void checkForUpdates() async {
     <td align="center"><a href="https://github.com/MrJohnDev">
     <img src="https://avatars.githubusercontent.com/u/38257989?v=4" width="100px;" style="border-radius: 50%"  alt=""/><br />
     <sub><b>MrJohnDev</b></sub></a></td>
-    <td align="center"><a href="https://github.com/bousalem98">
-    <img src="https://avatars.githubusercontent.com/u/61710794?v=4" width="100px;" style="border-radius: 50%"  alt=""/><br />
-    <sub><b>Mohamed Salem</b></sub></a></td>
   </tr>
 </table>
-<br/>
+<br/> -->
 
 [Feedback](https://github.com/adictgroup/flutter_update_checker/issues) and [Pull Requests](https://github.com/adictgroup/flutter_update_checker/pulls) are most welcome!
 
