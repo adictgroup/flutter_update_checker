@@ -10,6 +10,7 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
+
 # Flutter Update Checker - A Simple Package to Check for App Updates
 
 [![pub package](https://img.shields.io/pub/v/flutter_update_checker.svg?label=pub%20ver)](https://pub.dev/packages/flutter_update_checker)
@@ -20,6 +21,7 @@ This package helps developers easily check for updates of their applications fro
 ![version info](./other/docs/images/image1.png)
 
 ## Table of Contents
+
 - [Features](#features)
 - [Platform support](#platform-support)
 - [Requirements](#requirements)
@@ -36,12 +38,12 @@ This package helps developers easily check for updates of their applications fro
 
 ## Platform support
 
-| Feature                        | Android           | iOS |
-| ------------------------------ | :---------------: | :-: |
-| App Store                      | ✅                | ✅  |
-| App Gallery                    | ✅                | ✅  |
-| Google Play                    | (Only if installed from Google Play)* |   |
-| RuStore                        | ✅                | ✅  |
+| Feature     |                Android                 | iOS |
+| ----------- | :------------------------------------: | :-: |
+| App Store   |                   ✅                   | ✅  |
+| App Gallery |                   ✅                   | ✅  |
+| Google Play | (Only if installed from Google Play)\* |     |
+| RuStore     |                   ✅                   | ✅  |
 
 > [!IMPORTANT]
 > Google Play update checks cannot be tested locally. You must install the app via Google Play. Refer to the [official documentation](https://developer.android.com/guide/playcore/in-app-updates/test) for in-app updates.
@@ -66,12 +68,12 @@ This allows your app to open App Store links correctly.
 
 Also, ensure you are using Semantic Versioning (X.Y.Z) in your pubspec.yaml:
 
-
 ```yaml
 version: 1.2.3+XXXXXX
 ```
 
 ## Usage
+
 Refer to the example provided in the [`/example`](./example) folder for detailed usage.
 
 Here's a simple example of how to check for updates:
@@ -90,7 +92,7 @@ final updateChecker = UpdateStoreChecker(
 void checkForUpdates() async {
   try {
     // Check if an update is available
-    bool isUpdateAvailable = await updateChecker.checkUpdate();
+    final isUpdateAvailable = await updateChecker.checkUpdate();
     if (isUpdateAvailable) {
       print("An update is available!");
       // Optionally open the store link
@@ -100,7 +102,7 @@ void checkForUpdates() async {
     }
 
     // Get the version from the store
-    String storeVersion = await updateChecker.getStoreVersion();
+    final storeVersion = await updateChecker.getStoreVersion();
     print("Latest version in store: $storeVersion");
   } catch (e) {
     print("Error checking for updates: $e");
@@ -109,9 +111,25 @@ void checkForUpdates() async {
 
 ```
 
-## Contributing
+## 👥 Contributors
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/adictgroup">
+    <img src="https://avatars.githubusercontent.com/u/25362515?v=4" width="100px;" style="border-radius: 50%"  alt="" /><br />
+    <sub><b>ADICT Group</b></sub></a></td>
+    <td align="center"><a href="https://github.com/MrJohnDev">
+    <img src="https://avatars.githubusercontent.com/u/38257989?v=4" width="100px;" style="border-radius: 50%"  alt=""/><br />
+    <sub><b>MrJohnDev</b></sub></a></td>
+    <td align="center"><a href="https://github.com/bousalem98">
+    <img src="https://avatars.githubusercontent.com/u/61710794?v=4" width="100px;" style="border-radius: 50%"  alt=""/><br />
+    <sub><b>Mohamed Salem</b></sub></a></td>
+  </tr>
+</table>
+<br/>
 
 [Feedback](https://github.com/adictgroup/flutter_update_checker/issues) and [Pull Requests](https://github.com/adictgroup/flutter_update_checker/pulls) are most welcome!
 
 ## License
+
 This package is licensed under the [MIT License](https://github.com/adictgroup/flutter_update_checker/LICENSE)
