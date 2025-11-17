@@ -46,7 +46,7 @@ void main() {
     test('[Installed From] Store Version', () async {
       storeVersion = await checker.getStoreVersion();
       debugPrint('[Installed From] Store Version: \t$storeVersion');
-      expect(storeVersion, isNot('0.0.0'));
+      expect(storeVersion, isNotNull);
     });
 
     test('[Installed From] Store', () async {
@@ -56,18 +56,24 @@ void main() {
   });
 
   group('App Store', () {
-    final checker = UpdateStoreChecker(iosAppStoreId: appStoreId, iosAppStoreCountry: 'RU');
+    final checker = UpdateStoreChecker(
+      iosAppStoreId: appStoreId,
+      iosAppStoreCountry: 'RU',
+    );
     const storeType = StoreType.APP_STORE;
     String? storeVersion;
 
     test('App Store Version', () async {
       storeVersion = await checker.getStoreVersion(store: storeType);
       debugPrint('App Store Version: \t$storeVersion');
-      expect(storeVersion, isNot('0.0.0'));
+      expect(storeVersion, isNotNull);
     });
 
     test('App Store', () async {
-      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
+      final isFound = await checker.checkUpdate(
+        store: storeType,
+        storeVersion: storeVersion,
+      );
       expect(isFound, true);
     });
   });
@@ -80,11 +86,14 @@ void main() {
     test('Google Play Version', () async {
       storeVersion = await checker.getStoreVersion(store: storeType);
       debugPrint('Google Play Version: \t$storeVersion');
-      expect(storeVersion, '0.0.0'); // because the api doesn't give the version
+      expect(storeVersion, isNull); // because the api doesn't give the version
     });
 
     test('Google Play', () async {
-      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
+      final isFound = await checker.checkUpdate(
+        store: storeType,
+        storeVersion: storeVersion,
+      );
       expect(isFound, false); // because it must be installed from google play
     });
   });
@@ -101,17 +110,22 @@ void main() {
     test('App Gallery Version', () async {
       storeVersion = await checker.getStoreVersion(store: storeType);
       debugPrint('App Gallery Version: \t$storeVersion');
-      expect(storeVersion, isNot('0.0.0'));
+      expect(storeVersion, isNotNull);
     });
 
     test('App Gallery', () async {
-      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
+      final isFound = await checker.checkUpdate(
+        store: storeType,
+        storeVersion: storeVersion,
+      );
       expect(isFound, true);
     });
   });
 
   group('RuStore', () {
-    final checker = UpdateStoreChecker(androidRuStorePackage: ruStorePackageName);
+    final checker = UpdateStoreChecker(
+      androidRuStorePackage: ruStorePackageName,
+    );
     const storeType = StoreType.RU_STORE;
 
     String? storeVersion;
@@ -119,11 +133,14 @@ void main() {
     test('RuStore Version', () async {
       storeVersion = await checker.getStoreVersion(store: storeType);
       debugPrint('RuStore Version: \t$storeVersion');
-      expect(storeVersion, isNot('0.0.0'));
+      expect(storeVersion, isNotNull);
     });
 
     test('RuStore', () async {
-      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
+      final isFound = await checker.checkUpdate(
+        store: storeType,
+        storeVersion: storeVersion,
+      );
       expect(isFound, true);
     });
   });

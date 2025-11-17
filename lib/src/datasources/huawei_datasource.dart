@@ -10,8 +10,8 @@ import '../utils/utils_update.dart';
 import 'i_store_datasource.dart';
 
 class HuaweiDataSource extends IStoreDataSource {
-  final String appId;
-  final String packageName;
+  final String? appId;
+  final String? packageName;
 
   HuaweiDataSource({required this.appId, required this.packageName});
 
@@ -84,7 +84,7 @@ class HuaweiDataSource extends IStoreDataSource {
   }
 
   @override
-  Future<String> getStoreVersion() async {
+  Future<String?> getStoreVersion() async {
     try {
       const url = 'https://store-dre.hispace.dbankcloud.com/hwmarket/api/clientApi';
       final response = await Dio()
@@ -94,47 +94,51 @@ class HuaweiDataSource extends IStoreDataSource {
             data: _buildData(),
           )
           .timeout(const Duration(seconds: 10));
-      if (response.data.isEmpty) return '0.0.0';
+      if (response.data.isEmpty) return null;
 
       final decodedResults = response.data;
       if (decodedResults is Map) {
-        if (!decodedResults.containsKey('list')) return '0.0.0';
+        if (!decodedResults.containsKey('list')) return null;
         final list = decodedResults['list'] as List;
-        if (list.isEmpty) return '0.0.0';
+        if (list.isEmpty) return null;
         final version = decodedResults['list'][0]['version'];
         // debugPrint('[🔄 Update: getLatestVersion] ver: $version');
         return version;
       }
-      return '0.0.0';
+      return null;
     } catch (e) {
       debugPrint('[🔄 Update: getLatestVersion] err: ${e.toString()}');
-      return '0.0.0';
+      return null;
     }
   }
 
   @override
-  Future<void> update() async {
+  Future<bool> update() async {
     try {
+      if (appId == null) return false;
+
       final isSuccess = await launchUrlString(
-        StoreUrls.androidAppGalleryUpdateUrl(appId),
+        StoreUrls.androidAppGalleryUpdateUrl(appId!),
         mode: LaunchMode.externalNonBrowserApplication,
       );
-      if (isSuccess) return;
-      await launchUrlString(StoreUrls.androidAppGalleryUpdateUrl(appId));
+      if (isSuccess) return false;
+
+
+      return await launchUrlString(StoreUrls.androidAppGalleryUpdateUrl(appId!));
     } catch (e) {
       debugPrint('[🔄 Update: update] err: $e');
     }
+    return false;
   }
 
   @override
   Future<bool> needUpdate({String? storeVersion}) async {
     try {
       final version = storeVersion ?? await getStoreVersion();
-      final nowVersion = (await PackageInfo.fromPlatform()).version;
-      if (!UtilsUpdate.isNew(version, nowVersion) || version == '0.0.0') {
-        return false;
-      }
-      return true;
+      if (version == null) return false;
+
+      final appInfo = await PackageInfo.fromPlatform();
+      return UtilsUpdate.isNew(version, appInfo.version);
     } on Exception catch (e) {
       debugPrint('[🔄 Update: needUpdate] err: $e');
       return false;

@@ -5,16 +5,18 @@ import 'i_store_datasource.dart';
 
 class GooglePlayDataSource implements IStoreDataSource {
   @override
-  Future<String> getStoreVersion() async {
+  Future<String?> getStoreVersion() async {
     try {
       final info = await InAppUpdate.checkForUpdate();
+      if (info.availableVersionCode == null) return null;
+
       return '${info.availableVersionCode}';
     } on MissingPluginException catch (_) {
       debugPrint('[🔄 Update] Installed not from Google Play');
     } on Exception catch (e) {
       debugPrint('[🔄 Update: getStoreVersion] err: ${e.toString()}');
     }
-    return '0.0.0';
+    return null;
   }
 
   @override
@@ -28,26 +30,27 @@ class GooglePlayDataSource implements IStoreDataSource {
       return info.updateAvailability == UpdateAvailability.updateAvailable;
     } on MissingPluginException catch (_) {
       debugPrint('[🔄 Update] Installed not from Google Play');
-      return false;
     } on Exception catch (e) {
       debugPrint('[🔄 Update: needUpdate] err: ${e.toString()}');
-      return false;
     }
+    return false;
   }
 
   @override
-  Future<void> update() async {
+  Future<bool> update() async {
     try {
       final appUpdateResult = await InAppUpdate.startFlexibleUpdate();
       //Perform flexible update
       if (appUpdateResult == AppUpdateResult.success) {
         //App Update successful
         await InAppUpdate.completeFlexibleUpdate();
+        return true;
       }
     } on MissingPluginException catch (_) {
       debugPrint('[🔄 Update: update] Installed not from Google Play');
     } catch (e) {
       debugPrint('[🔄 Update: update] err: ${e.toString()}');
     }
+    return false;
   }
 }

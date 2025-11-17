@@ -37,11 +37,11 @@ import 'store_types.dart';
 
 class UpdateStoreChecker {
   // Store-specific identifiers for checking updates
-  int? _iosAppStoreId;
-  String? _iosAppStoreCountry;
-  String? _androidAppGalleryId;
-  String? _androidAppGalleryPackageName;
-  String? _androidRuStorePackage;
+  int? _appStoreId;
+  String? _appStoreCountry;
+  String? _appGalleryId;
+  String? _appGalleryPackageName;
+  String? _ruStorePackage;
 
   /// Constructor for UpdateStoreChecker
   ///
@@ -67,11 +67,11 @@ class UpdateStoreChecker {
              (androidAppGalleryId != null && androidAppGalleryPackageName != null),
          'If androidAppGalleryId is not null, androidAppGalleryPackageName must also be not null, and vice versa.',
        ) {
-    _iosAppStoreId = iosAppStoreId;
-    _iosAppStoreCountry = iosAppStoreCountry;
-    _androidAppGalleryId = androidAppGalleryId;
-    _androidAppGalleryPackageName = androidAppGalleryPackageName;
-    _androidRuStorePackage = androidRuStorePackage;
+    _appStoreId = iosAppStoreId;
+    _appStoreCountry = iosAppStoreCountry;
+    _appGalleryId = androidAppGalleryId;
+    _appGalleryPackageName = androidAppGalleryPackageName;
+    _ruStorePackage = androidRuStorePackage;
   }
 
   /// Checks if an update is available for the app in the store.
@@ -107,21 +107,22 @@ class UpdateStoreChecker {
   /// This method redirects the user to the store page of the app for updating.
   ///
   /// [store] - Optional, specify the store type. If null, it will auto-detect.
-  Future<void> update({StoreType? store}) async {
+  Future<bool> update({StoreType? store}) async {
     try {
       // Determine the store type
       final type = store ?? await getStoreType();
-      if (type == null) return;
+      if (type == null) return false;
 
       // Get the data source for the store type
       final source = await _getStoreDataSource(type);
-      if (source == null) return;
+      if (source == null) return false;
 
       // Redirect to the update page in the store
       return source.update();
     } on Exception catch (e) {
       debugPrint('[🔄 Update: update] err: $e');
     }
+    return false;
   }
 
   /// Retrieves the current version of the app in the store.
@@ -130,22 +131,22 @@ class UpdateStoreChecker {
   ///
   /// [store] - Optional, specify the store type. If null, it will auto-detect.
   ///
-  /// Returns the version of the app as a string, or "0.0.0" if it fails.
-  Future<String> getStoreVersion({StoreType? store}) async {
+  /// Returns the version of the app as a string, or null if it fails.
+  Future<String?> getStoreVersion({StoreType? store}) async {
     try {
       // Determine the store type
       final type = store ?? await getStoreType();
-      if (type == null) return '0.0.0';
+      if (type == null) return null;
 
       // Get the data source for the store type
       final source = await _getStoreDataSource(type);
-      if (source == null) return '0.0.0';
+      if (source == null) return null;
 
       // Fetch the version from the store
       return _getStoreVersion(source);
     } on Exception catch (e) {
       debugPrint('[🔄 Update: getStoreVersion] err: $e');
-      return '0.0.0';
+      return null;
     }
   }
 
@@ -160,15 +161,13 @@ class UpdateStoreChecker {
       // Fetch the package info and determine the installer store
       final installedFrom = (await PackageInfo.fromPlatform()).installerStore;
 
-      StoreType? type;
       for (final s in StoreType.values) {
         if (s.package == installedFrom) return s;
       }
-      return type;
     } on Exception catch (e) {
       debugPrint('[🔄 Update: getStoreType] err: $e');
-      return null;
     }
+    return null;
   }
 
   /// Returns the data source for a given store type.
@@ -176,28 +175,22 @@ class UpdateStoreChecker {
   /// Depending on the [StoreType], this method returns an instance of the corresponding
   /// data source (e.g. App Store, Google Play).
   ///
-  /// [type] - The type of the store (e.g., App Store, Google Play, etc.).
+  /// [storeType] - The type of the store (e.g., App Store, Google Play, etc.).
   ///
   /// Returns an instance of [IStoreDataSource], or `null` if no data source is available.
-  Future<IStoreDataSource?> _getStoreDataSource(StoreType type) async {
+  Future<IStoreDataSource?> _getStoreDataSource(StoreType storeType) async {
     try {
-      switch (type) {
-        case StoreType.APP_STORE:
-          if (_iosAppStoreId == null) return null;
-          return AppStoreDataSource(appId: _iosAppStoreId.toString(), country: _iosAppStoreCountry ?? 'US');
-        case StoreType.RU_STORE:
-          if (_androidRuStorePackage == null) return null;
-          return RuStoreDataSource(packageName: _androidRuStorePackage!);
-        case StoreType.APP_GALLERY:
-          if (_androidAppGalleryId == null || _androidAppGalleryPackageName == null) {
-            return null;
-          }
-          return HuaweiDataSource(appId: _androidAppGalleryId!, packageName: _androidAppGalleryPackageName!);
-        case StoreType.GOOGLE_PLAY:
-          return GooglePlayDataSource();
-        default:
-          return null;
-      }
+      return switch (storeType) {
+        StoreType.GOOGLE_PLAY => GooglePlayDataSource(),
+        StoreType.RU_STORE => _ruStorePackage == null ? null : RuStoreDataSource(packageName: _ruStorePackage),
+        StoreType.APP_STORE =>
+          _appStoreId == null ? null : AppStoreDataSource(appId: _appStoreId, country: _appStoreCountry ?? 'US'),
+        StoreType.APP_GALLERY =>
+          (_appGalleryId == null || _appGalleryPackageName == null)
+              ? null
+              : HuaweiDataSource(appId: _appGalleryId, packageName: _appGalleryPackageName),
+        _ => null,
+      };
     } on Exception catch (e) {
       debugPrint('[🔄 Update: _getStoreDataSource] err: $e');
       return null;
@@ -226,12 +219,12 @@ class UpdateStoreChecker {
   /// [store] - The store data source.
   ///
   /// Returns the store version as a string.
-  Future<String> _getStoreVersion(IStoreDataSource store) async {
+  Future<String?> _getStoreVersion(IStoreDataSource store) async {
     try {
       return await store.getStoreVersion();
     } on Exception catch (e) {
       debugPrint('[🔄 Update: _getStoreVersion] err: $e');
-      return '0.0.0';
+      return null;
     }
   }
 }

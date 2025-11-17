@@ -1,5 +1,5 @@
 abstract class IStoreDataSource {
-  Future<String> getStoreVersion();
+  Future<String?> getStoreVersion();
   Future<bool> needUpdate({String? storeVersion});
-  Future<void> update();
+  Future<bool> update();
 }

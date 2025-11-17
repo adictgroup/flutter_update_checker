@@ -11,7 +11,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final Map<StoreType, String> updateInfo = {};
+  final Map<StoreType, String?> updateInfo = {};
 
   @override
   void initState() {
@@ -51,34 +51,32 @@ class _MainAppState extends State<MainApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: updateInfo.isEmpty
-              ? const CircularProgressIndicator.adaptive()
-              : ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 200),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (c, i) => const SizedBox(height: 8),
-                    itemCount: updateInfo.entries.length,
-                    itemBuilder: (c, i) {
-                      final item = updateInfo.entries.toList()[i];
-                      return Row(
-                        children: [
-                          Text(item.key.title),
-                          const Spacer(),
-                          Text(item.value.toString()),
-                        ],
-                      );
-                    },
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(
+            child: updateInfo.isEmpty
+                ? const CircularProgressIndicator.adaptive()
+                : ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 200),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      separatorBuilder: (c, i) => const SizedBox(height: 8),
+                      itemCount: updateInfo.entries.length,
+                      itemBuilder: (c, i) {
+                        final item = updateInfo.entries.toList()[i];
+                        return Row(
+                          children: [
+                            Text(item.key.title),
+                            const Spacer(),
+                            Text(item.value.toString()),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                ),
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
