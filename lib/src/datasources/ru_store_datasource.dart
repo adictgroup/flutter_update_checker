@@ -16,9 +16,7 @@ class RuStoreDataSource extends IStoreDataSource {
   Future<String> getStoreVersion() async {
     try {
       final url = StoreUrls.androidRuStore(packageName);
-      final response = await Dio().get(url).timeout(
-            const Duration(seconds: 10),
-          );
+      final response = await Dio().get(url).timeout(const Duration(seconds: 10));
 
       if (response.data.isEmpty) return '0.0.0';
 

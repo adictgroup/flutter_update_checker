@@ -63,12 +63,10 @@ class UpdateStoreChecker {
     String? androidAppGalleryPackageName,
     String? androidRuStorePackage,
   }) : assert(
-          (androidAppGalleryId == null &&
-                  androidAppGalleryPackageName == null) ||
-              (androidAppGalleryId != null &&
-                  androidAppGalleryPackageName != null),
-          'If androidAppGalleryId is not null, androidAppGalleryPackageName must also be not null, and vice versa.',
-        ) {
+         (androidAppGalleryId == null && androidAppGalleryPackageName == null) ||
+             (androidAppGalleryId != null && androidAppGalleryPackageName != null),
+         'If androidAppGalleryId is not null, androidAppGalleryPackageName must also be not null, and vice versa.',
+       ) {
     _iosAppStoreId = iosAppStoreId;
     _iosAppStoreCountry = iosAppStoreCountry;
     _androidAppGalleryId = androidAppGalleryId;
@@ -186,22 +184,15 @@ class UpdateStoreChecker {
       switch (type) {
         case StoreType.APP_STORE:
           if (_iosAppStoreId == null) return null;
-          return AppStoreDataSource(
-            appId: _iosAppStoreId.toString(),
-            country: _iosAppStoreCountry ?? 'US',
-          );
+          return AppStoreDataSource(appId: _iosAppStoreId.toString(), country: _iosAppStoreCountry ?? 'US');
         case StoreType.RU_STORE:
           if (_androidRuStorePackage == null) return null;
           return RuStoreDataSource(packageName: _androidRuStorePackage!);
         case StoreType.APP_GALLERY:
-          if (_androidAppGalleryId == null ||
-              _androidAppGalleryPackageName == null) {
+          if (_androidAppGalleryId == null || _androidAppGalleryPackageName == null) {
             return null;
           }
-          return HuaweiDataSource(
-            appId: _androidAppGalleryId!,
-            packageName: _androidAppGalleryPackageName!,
-          );
+          return HuaweiDataSource(appId: _androidAppGalleryId!, packageName: _androidAppGalleryPackageName!);
         case StoreType.GOOGLE_PLAY:
           return GooglePlayDataSource();
         default:
@@ -221,10 +212,7 @@ class UpdateStoreChecker {
   /// [storeVersion] - Optional, the version to compare against the store version.
   ///
   /// Returns `true` if an update is needed, otherwise `false`.
-  Future<bool> _checkUpdateStore(
-    IStoreDataSource store, {
-    String? storeVersion,
-  }) async {
+  Future<bool> _checkUpdateStore(IStoreDataSource store, {String? storeVersion}) async {
     try {
       return await store.needUpdate(storeVersion: storeVersion);
     } on Exception catch (e) {

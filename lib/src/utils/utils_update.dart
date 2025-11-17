@@ -14,8 +14,7 @@ class UtilsUpdate {
       final currentV = currentVersion.replaceAll(regx, '').split('.');
 
       // Determine the maximum length of the version segments to compare.
-      final maxLength =
-          [storeV.length, currentV.length].reduce((a, b) => a > b ? a : b);
+      final maxLength = [storeV.length, currentV.length].reduce((a, b) => a > b ? a : b);
 
       // Compare the versions, treating missing segments as '0'.
       for (var i = 0; i < maxLength; i++) {

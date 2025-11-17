@@ -56,10 +56,7 @@ void main() {
   });
 
   group('App Store', () {
-    final checker = UpdateStoreChecker(
-      iosAppStoreId: appStoreId,
-      iosAppStoreCountry: 'RU',
-    );
+    final checker = UpdateStoreChecker(iosAppStoreId: appStoreId, iosAppStoreCountry: 'RU');
     const storeType = StoreType.APP_STORE;
     String? storeVersion;
 
@@ -70,10 +67,7 @@ void main() {
     });
 
     test('App Store', () async {
-      final isFound = await checker.checkUpdate(
-        store: storeType,
-        storeVersion: storeVersion,
-      );
+      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
       expect(isFound, true);
     });
   });
@@ -90,10 +84,7 @@ void main() {
     });
 
     test('Google Play', () async {
-      final isFound = await checker.checkUpdate(
-        store: storeType,
-        storeVersion: storeVersion,
-      );
+      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
       expect(isFound, false); // because it must be installed from google play
     });
   });
@@ -114,18 +105,13 @@ void main() {
     });
 
     test('App Gallery', () async {
-      final isFound = await checker.checkUpdate(
-        store: storeType,
-        storeVersion: storeVersion,
-      );
+      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
       expect(isFound, true);
     });
   });
 
   group('RuStore', () {
-    final checker = UpdateStoreChecker(
-      androidRuStorePackage: ruStorePackageName,
-    );
+    final checker = UpdateStoreChecker(androidRuStorePackage: ruStorePackageName);
     const storeType = StoreType.RU_STORE;
 
     String? storeVersion;
@@ -137,10 +123,7 @@ void main() {
     });
 
     test('RuStore', () async {
-      final isFound = await checker.checkUpdate(
-        store: storeType,
-        storeVersion: storeVersion,
-      );
+      final isFound = await checker.checkUpdate(store: storeType, storeVersion: storeVersion);
       expect(isFound, true);
     });
   });

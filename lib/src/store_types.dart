@@ -9,11 +9,7 @@ enum StoreType {
   GOOGLE_PLAY(packageName: 'com.android.vending', title: 'Google Play'),
   RU_STORE(packageName: 'ru.vk.store', title: 'RuStore');
 
-  const StoreType({
-    required String packageName,
-    required String title,
-  })  : _packageName = packageName,
-        _title = title;
+  const StoreType({required String packageName, required String title}) : _packageName = packageName, _title = title;
 
   final String _packageName;
   final String _title;

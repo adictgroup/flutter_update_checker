@@ -17,8 +17,7 @@ class HuaweiDataSource extends IStoreDataSource {
 
   final Map<String, dynamic> _headers = {
     'Content-Type': 'text/plain',
-    'User-Agent':
-        'UpdateSDK##4.0.1.300##Android##Pixel 2##com.huawei.appmarket##12.0.1.301'
+    'User-Agent': 'UpdateSDK##4.0.1.300##Android##Pixel 2##com.huawei.appmarket##12.0.1.301',
   };
 
   // Hardcode, yeah
@@ -33,7 +32,7 @@ class HuaweiDataSource extends IStoreDataSource {
         'deviceFeatures':
             'U,P,B,0c,e,0J,p,a,b,04,m,android.hardware.wifi.rtt,com.google.hardware.camera.easel,com.google.android.feature.PIXEL_2017_EXPERIENCE,08,03,C,S,0G,q,L,2,6,Y,Z,0M,android.hardware.vr.high_performance,f,1,07,8,9,android.hardware.sensor.hifi_sensors,O,H,com.google.android.feature.TURBO_PRELOAD,android.hardware.vr.headtracking,W,x,G,o,06,0N,com.google.android.feature.PIXEL_EXPERIENCE,3,R,d,Q,n,android.hardware.telephony.carrierlock,y,T,i,r,u,com.google.android.feature.WELLBEING,l,4,0Q,N,M,01,09,V,7,5,0H,g,s,c,0l,t,0L,0W,0X,k,00,com.google.android.feature.GOOGLE_EXPERIENCE,android.hardware.sensor.assist,android.hardware.audio.pro,K,E,02,I,J,j,D,h,android.hardware.wifi.aware,05,X,v',
         'dpi': '420',
-        'preferLan': 'en'
+        'preferLan': 'en',
       }),
       'emuiApiLevel': '0',
       'firmwareVersion': '10',
@@ -64,9 +63,9 @@ class HuaweiDataSource extends IStoreDataSource {
             'pkgMode': '0',
             'shellApkVer': '0',
             'targetSdkVersion': '19',
-            'versionCode': '1'
-          }
-        ]
+            'versionCode': '1',
+          },
+        ],
       }),
       'resolution': '1080_1794',
       'sdkVersion': '4.0.1.300',
@@ -76,7 +75,7 @@ class HuaweiDataSource extends IStoreDataSource {
       'ts': (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
       'ver': '1.2',
       'version': '12.0.1.301',
-      'versionCode': '120001301'
+      'versionCode': '120001301',
     };
 
     final dataq = Uri(queryParameters: params).query;
@@ -87,20 +86,14 @@ class HuaweiDataSource extends IStoreDataSource {
   @override
   Future<String> getStoreVersion() async {
     try {
-      const url =
-          'https://store-dre.hispace.dbankcloud.com/hwmarket/api/clientApi';
+      const url = 'https://store-dre.hispace.dbankcloud.com/hwmarket/api/clientApi';
       final response = await Dio()
           .request(
             url,
-            options: Options(
-              method: 'POST',
-              headers: _headers,
-            ),
+            options: Options(method: 'POST', headers: _headers),
             data: _buildData(),
           )
-          .timeout(
-            const Duration(seconds: 10),
-          );
+          .timeout(const Duration(seconds: 10));
       if (response.data.isEmpty) return '0.0.0';
 
       final decodedResults = response.data;
