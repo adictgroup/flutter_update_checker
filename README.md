@@ -111,7 +111,7 @@ void checkForUpdates() async {
 
 ```
 
-## 👥 Contributors
+## Contributors
 
 <table>
   <tr>
